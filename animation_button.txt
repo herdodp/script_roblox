@@ -1,0 +1,66 @@
+
+
+local button = script.parent
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character
+
+
+
+button.MouseButton1Click:Connect(function()
+	
+	print("button di klik")
+	
+	if character then
+		
+		print("karakter ditemukan")
+		
+		local humanoid = character:FindFirstChild("Humanoid")
+		
+		if humanoid then
+			
+			print("humanoid ditemukan")
+			
+			local animation = Instance.new("Animation")
+			animation.AnimationId = "rbxassetid://123677415157845"
+			
+			local playanimation = humanoid:LoadAnimation(animation)
+			local speedtime = 0.5
+			local delaytime = 3
+			
+			playanimation:Play()
+			
+			playanimation:AdjustSpeed(speedtime)
+			
+			playanimation.Priority = Enum.AnimationPriority.Action
+			
+			wait(delaytime)
+			
+			
+			playanimation:Stop()
+			
+	
+		
+		
+		else
+			print("Humanoid tidak ditemuka")
+			
+		end
+		
+		
+		
+		
+	else
+		print("karakter tidak ditemukan")
+		
+		
+		
+		
+	end
+	
+	
+	
+	
+	
+	
+end)
