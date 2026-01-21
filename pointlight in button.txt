@@ -1,0 +1,102 @@
+
+
+local button = script.parent
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character
+
+
+
+button.MouseButton1Click:Connect(function()
+	
+	print("button di klik")
+	
+	if character then
+		
+		print("karakter ditemukan")
+		
+		local humanoid = character:FindFirstChild("Humanoid")
+		
+		if humanoid then
+			
+			print("humanoid ditemukan")
+			
+			local animation = Instance.new("Animation")
+			animation.AnimationId = "rbxassetid://123677415157845"
+			
+			local playanimation = humanoid:LoadAnimation(animation)
+			local speedtime = 0.5
+			local delaytime = 3
+			
+			playanimation:Play()
+			
+			playanimation:AdjustSpeed(speedtime)
+			
+			playanimation.Priority = Enum.AnimationPriority.Action
+			
+			-- add point light to button 
+			
+			local parthumanoid = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
+			
+			local ball = Instance.new("Part")
+			ball.Material = Enum.Material.Neon
+			ball.Shape = Enum.PartType.Ball
+			ball.Color = Color3.fromRGB(255, 0, 0)
+			ball.Size = Vector3.new(1,1,1)
+			ball.Anchored = false
+			ball.CanCollide = false
+			ball.Transparency = 1
+			ball.Parent = workspace
+			
+			local light = Instance.new("PointLight")
+			light.Parent = ball
+			light.Range = 15
+			light.Color = Color3.fromRGB(255, 0, 0)
+			light.Brightness = 25
+			
+			local weld = Instance.new("Weld")
+			weld.Part0 = parthumanoid
+			weld.Part1 = ball
+			weld.C0 = CFrame.new(0,2,0)
+			weld.Parent = ball
+			
+			wait(2)
+			ball:Destroy()
+			
+			-- end point light
+			
+		
+		
+			wait(delaytime)
+			
+			
+			playanimation:Stop()
+			
+			
+			
+	
+	
+		
+		
+		else
+			print("Humanoid tidak ditemukan")
+			
+		end
+		
+		
+		
+		
+	else
+		print("karakter tidak ditemukan")
+		
+		
+		
+		
+	end
+	
+	
+	
+	
+	
+	
+end)
