@@ -1,0 +1,43 @@
+-- put on your part with proximityprompt
+
+
+local part  = script.Parent
+local prompt = part:WaitForChild("ProximityPrompt")
+
+prompt.Triggered:Connect(function(player)
+	
+	local character = player.Character
+	
+	if not character then return end
+	
+	local hrp = character:WaitForChild("HumanoidRootPart")
+	local humanoid = character:WaitForChild("Humanoid")
+	
+	humanoid.WalkSpeed = 0
+	humanoid.AutoRotate = false
+	
+	local a = Instance.new("Attachment")
+	a.Parent = hrp
+	
+	local b = Instance.new("AlignPosition")
+	b.Attachment0 = a
+	b.Mode = Enum.PositionAlignmentMode.OneAttachment
+	b.Position = (part.CFrame * CFrame.new(0,0,-3)).Position
+	b.MaxForce = math.huge
+	b.Responsiveness = 30
+	b.Parent = hrp
+	
+	task.delay(0.6, function()
+		
+		a:Destroy()
+		b:Destroy()
+		
+		humanoid.WalkSpeed = 20
+		humanoid.AutoRotate = true
+		
+		
+	end)
+	
+	
+	
+end)
